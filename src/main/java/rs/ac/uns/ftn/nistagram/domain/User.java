@@ -1,4 +1,4 @@
-package rs.ac.uns.ftn.nistagram.domain.user;
+package rs.ac.uns.ftn.nistagram.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
