@@ -30,12 +30,22 @@ public class ProductController {
     @PostMapping
     public ProductDTO add(@RequestBody ProductDTO dto) {
         return mapper.map(
-                this.productService.add(mapper.map(dto, Product.class)),
+                productService.add(mapper.map(dto, Product.class)),
                 ProductDTO.class);
     }
 
     @GetMapping("{id}")
     public ProductDTO get(@PathVariable long id) {
         return mapper.map(this.productService.get(id), ProductDTO.class);
+    }
+
+    @PutMapping("{id}")
+    public void update(@PathVariable long id, @RequestBody ProductDTO dto) {
+        productService.update(id, mapper.map(dto, Product.class));
+    }
+
+    @DeleteMapping("{id}")
+    public void delete(@PathVariable long id) {
+        productService.delete(id);
     }
 }

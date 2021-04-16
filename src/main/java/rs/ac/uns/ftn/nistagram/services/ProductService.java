@@ -1,5 +1,6 @@
 package rs.ac.uns.ftn.nistagram.services;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import rs.ac.uns.ftn.nistagram.domain.Product;
 import rs.ac.uns.ftn.nistagram.exceptions.EntityNotFoundException;
@@ -26,5 +27,23 @@ public class ProductService {
     public Product get(long id) {
         return productRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException());
+    }
+
+    public void update(long id, Product product) {
+        if(productRepository.existsById(id)) {
+            product.setId(id);
+            productRepository.save(product);
+        } else {
+            throw new EntityNotFoundException("Product with id " + id + " doesn't exist!");
+        }
+    }
+
+    public void delete(long id) {
+        try {
+            productRepository.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
+            throw new EntityNotFoundException("Product with id " + id + " doesn't exist!");
+        }
+
     }
 }
