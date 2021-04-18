@@ -1,6 +1,9 @@
 package rs.ac.uns.ftn.nistagram.controllers;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import rs.ac.uns.ftn.nistagram.controllers.DTOs.ProductDTO;
 import rs.ac.uns.ftn.nistagram.domain.Product;
@@ -21,10 +24,14 @@ public class ProductController {
     }
 
     @GetMapping
-    public List<ProductDTO> getAll() {
-        return this.productService.getAll().stream()
+    @Secured("ROLE_GUEST")
+    public ResponseEntity<List<ProductDTO>> getAll() {
+        List<ProductDTO> productDtoList =
+                this.productService.getAll().stream()
                 .map(product -> mapper.map(product, ProductDTO.class))
                 .collect(Collectors.toList());
+
+        return ResponseEntity.ok(productDtoList);
     }
 
     @PostMapping
