@@ -1,14 +1,17 @@
 package rs.ac.uns.ftn.nistagram.exceptions;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ControllerAdvice
-public class RuntimeExceptionHandler {
+public class ApplicationExceptionHandler {
     @ResponseBody
-    @ExceptionHandler(RuntimeException.class)
-    String handleException(RuntimeException e) {
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(ApplicationException.class)
+    String handleException(ApplicationException e) {
         return e.getMessage();
     }
 }
