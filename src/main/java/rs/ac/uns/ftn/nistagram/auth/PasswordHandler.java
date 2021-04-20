@@ -6,12 +6,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import java.security.SecureRandom;
 import java.util.Arrays;
 
-public class Crypto {
+public class PasswordHandler {
 
     private final SecureRandom rng;
     private final BCryptPasswordEncoder encoder;
 
-    public Crypto() {
+    public PasswordHandler() {
         rng  = new SecureRandom();
         encoder = new BCryptPasswordEncoder();
     }
