@@ -1,8 +1,8 @@
-package rs.ac.uns.ftn.nistagram.auth.user;
+package rs.ac.uns.ftn.nistagram.auth.model;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import rs.ac.uns.ftn.nistagram.auth.identity.Identity;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -12,8 +12,8 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Table(name = "credentials")
-public class User implements Identity {
+@Table(name = "users")
+public class User implements UserDetails {
 
     @Id
     private String username;
@@ -22,8 +22,7 @@ public class User implements Identity {
     private String name;
     private String lastName;
 
-    private byte[] passwordHash;
-    private byte[] salt;
+    private String passwordHash;
 
     private UUID uuid;
     private String role;
@@ -75,20 +74,12 @@ public class User implements Identity {
         throw new RuntimeException("Password is not available in its pure form.");
     }
 
-    public byte[] getPasswordHash() {
+    public String getPasswordHash() {
         return passwordHash;
     }
 
-    public void setPasswordHash(byte[] passwordHash) {
+    public void setPasswordHash(String passwordHash) {
         this.passwordHash = passwordHash;
-    }
-
-    public byte[] getSalt() {
-        return salt;
-    }
-
-    public void setSalt(byte[] salt) {
-        this.salt = salt;
     }
 
     public UUID getUuid() {
