@@ -1,37 +1,37 @@
 package rs.ac.uns.ftn.nistagram.auth;
 
-import org.apache.tomcat.util.codec.binary.Base64;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.stereotype.Component;
+import rs.ac.uns.ftn.nistagram.config.PasswordHandlingConfig;
 
-import java.security.SecureRandom;
-import java.util.Arrays;
-
+@Component
 public class PasswordHandler {
 
-    private final SecureRandom rng;
-    private final BCryptPasswordEncoder encoder;
+    private final PasswordHandlingConfig config;
 
-    public PasswordHandler() {
-        rng  = new SecureRandom();
-        encoder = new BCryptPasswordEncoder();
+    public PasswordHandler(PasswordHandlingConfig handlingConfig) {
+        config = handlingConfig;
     }
 
-    /** Generates a random array of bytes of the given length */
-    public byte[] generateSalt(int saltLength) {
-        byte[] salt = new byte[saltLength];
-        rng.nextBytes(salt);
-        return salt;
+    /** Generates a random salt string */
+    public String generateSalt() {
+        return BCrypt.gensalt(config.getLogRounds());
     }
 
-    /** Encrypts the given char sequence using Scrypt algorithm */
-    public byte[] hash(CharSequence charSequence, byte[] salt) {
-        String passHashString =
-                encoder.encode(charSequence + Base64.encodeBase64String(salt));
-        return passHashString.getBytes();
+    /** Hashes the given password string using BCrypt algorithm and provided salt string */
+    public String hash(String password, String salt) {
+        return BCrypt.hashpw(password, salt);
     }
 
-    /** Check whether the given password + salt hashing result equals the given passHash */
-    public boolean checkPass(String pass, byte[] salt, byte[] passHash) {
-        return Arrays.equals(hash(pass, salt), passHash);
+    /** Hashes the given password string using BCrypt algorithm */
+    public String hash(String password){
+        var salt = BCrypt.gensalt(config.getLogRounds());
+        return BCrypt.hashpw(password,salt);
     }
+
+    /** Check whether the given password matches a hashed one */
+    public boolean checkPass(String password, String passHash) {
+        return BCrypt.checkpw(password, passHash);
+    }
+
 }

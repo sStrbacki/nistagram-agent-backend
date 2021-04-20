@@ -1,5 +1,6 @@
 package rs.ac.uns.ftn.nistagram.auth.user;
 
+import org.hibernate.annotations.Type;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import rs.ac.uns.ftn.nistagram.auth.identity.Identity;
@@ -12,21 +13,19 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Table(name = "credentials")
+@Table(name = "users")
 public class User implements Identity {
 
     @Id
     private String username;
     // TODO Make this unique
     private String email;
-    private String name;
-    private String lastName;
-
-    private byte[] passwordHash;
-    private byte[] salt;
-
+    private String fullName;
+    private String passwordHash;
+    @Type(type = "uuid-char")
     private UUID uuid;
     private String role;
+    private boolean activated;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -75,20 +74,12 @@ public class User implements Identity {
         throw new RuntimeException("Password is not available in its pure form.");
     }
 
-    public byte[] getPasswordHash() {
+    public String getPasswordHash() {
         return passwordHash;
     }
 
-    public void setPasswordHash(byte[] passwordHash) {
+    public void setPasswordHash(String passwordHash) {
         this.passwordHash = passwordHash;
-    }
-
-    public byte[] getSalt() {
-        return salt;
-    }
-
-    public void setSalt(byte[] salt) {
-        this.salt = salt;
     }
 
     public UUID getUuid() {
@@ -107,19 +98,23 @@ public class User implements Identity {
         this.role = role;
     }
 
-    public String getName() {
-        return name;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
-    public String getLastName() {
-        return lastName;
+    public boolean isActivated() {
+        return activated;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setActivated(boolean activated) {
+        this.activated = activated;
+    }
+    public void activate(){
+        if(!activated)
+            activated = true;
     }
 }
