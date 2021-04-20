@@ -1,9 +1,16 @@
 package rs.ac.uns.ftn.nistagram.controllers.DTOs;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Positive;
+
 public class ProductDTO {
     private long id;
+    @NotBlank
     private String name;
-    private String image;
+    private String imageUrl;
+    @Positive
+    private double price;
+    @Positive
     private int quantity;
 
     public long getId() {
@@ -22,12 +29,20 @@ public class ProductDTO {
         this.name = name;
     }
 
-    public String getImage() {
-        return image;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     public int getQuantity() {

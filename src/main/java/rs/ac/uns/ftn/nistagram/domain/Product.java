@@ -9,7 +9,8 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String name;
-    private String image;
+    private String imageUrl;
+    private double price;
     private int quantity;
 
     public long getId() {
@@ -28,12 +29,20 @@ public class Product {
         this.name = name;
     }
 
-    public String getImage() {
-        return image;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     public int getQuantity() {
