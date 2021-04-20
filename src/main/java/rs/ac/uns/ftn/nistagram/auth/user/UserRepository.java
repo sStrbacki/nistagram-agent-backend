@@ -14,8 +14,4 @@ public interface UserRepository extends JpaRepository<User, String>, IdentityRep
     @Override
     @Query("select u from User u where u.username = ?1")
     Optional<Identity> getByUsername(String username);
-
-    @Override
-    @Query("select u from User u where u.email = ?1")
-    Optional<Identity> getByEmail(String email);
 }

@@ -20,4 +20,8 @@ public class IdentityService implements UserDetailsService {
         return identityRepository.getByUsername(username)
                 .orElseThrow(AuthorizationException::new);
     }
+
+    public void login(String username, String password) {
+
+    }
 }

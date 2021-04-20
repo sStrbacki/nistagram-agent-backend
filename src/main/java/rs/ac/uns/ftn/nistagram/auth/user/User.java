@@ -20,8 +20,10 @@ public class User implements Identity {
     private String username;
     private String name;
     private String lastName;
-    @Deprecated
-    private String password;
+
+    private byte[] passwordHash;
+    private byte[] salt;
+
     private UUID uuid;
     private String role;
 
@@ -69,11 +71,23 @@ public class User implements Identity {
 
     @Override
     public String getPassword() {
-        return password;
+        throw new RuntimeException("Password is not available in its pure form.");
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public byte[] getPasswordHash() {
+        return passwordHash;
+    }
+
+    public void setPasswordHash(byte[] passwordHash) {
+        this.passwordHash = passwordHash;
+    }
+
+    public byte[] getSalt() {
+        return salt;
+    }
+
+    public void setSalt(byte[] salt) {
+        this.salt = salt;
     }
 
     public UUID getUuid() {
