@@ -16,8 +16,9 @@ import java.util.UUID;
 public class User implements Identity {
 
     @Id
-    private String email;
     private String username;
+    // TODO Make this unique
+    private String email;
     private String name;
     private String lastName;
 
