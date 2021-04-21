@@ -1,4 +1,5 @@
 package rs.ac.uns.ftn.nistagram.config;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 

@@ -16,25 +16,30 @@ public class PasswordValidator implements ConstraintValidator<PasswordConstraint
 
     @Override
     public boolean isValid(String password, ConstraintValidatorContext context) {
-        if(password == null)
+        if (password == null)
             return false;
 
         return !tooShort(password) && containsLowerLetter(password) && containsUpperLetter(password) &&
-        containsDigit(password) && containsSpecialCharacter(password);
+                containsDigit(password) && containsSpecialCharacter(password);
     }
-    private  boolean tooShort(String password){
+
+    private boolean tooShort(String password) {
         return password.length() < 10;
     }
-    private boolean containsUpperLetter(String password){
+
+    private boolean containsUpperLetter(String password) {
         return Pattern.compile("^(?=.*[A-Z])").matcher(password).find();
     }
-    private boolean containsLowerLetter(String password){
+
+    private boolean containsLowerLetter(String password) {
         return Pattern.compile("^(?=.*[a-z])").matcher(password).find();
     }
-    private boolean containsDigit(String password){
+
+    private boolean containsDigit(String password) {
         return Pattern.compile("^(?=.*\\d)").matcher(password).find();
     }
-    private boolean containsSpecialCharacter(String password){
+
+    private boolean containsSpecialCharacter(String password) {
         return Pattern.compile("\\W+").matcher(password).find();
     }
 }

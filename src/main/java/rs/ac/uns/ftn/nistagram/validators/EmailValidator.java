@@ -6,7 +6,7 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.util.regex.Pattern;
 
-public class EmailValidator implements ConstraintValidator<EmailConstraint,String> {
+public class EmailValidator implements ConstraintValidator<EmailConstraint, String> {
     @Override
     public void initialize(EmailConstraint constraintAnnotation) {
         ConstraintValidator.super.initialize(constraintAnnotation);
@@ -14,7 +14,7 @@ public class EmailValidator implements ConstraintValidator<EmailConstraint,Strin
 
     @Override
     public boolean isValid(String email, ConstraintValidatorContext constraintValidatorContext) {
-        if(email == null)
+        if (email == null)
             return false;
         return !isEmpty(email) && matchesPattern(email);
     }

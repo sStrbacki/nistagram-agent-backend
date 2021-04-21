@@ -14,4 +14,9 @@ public class ApplicationExceptionHandler {
     String handleException(ApplicationException e) {
         return e.getMessage();
     }
+
+    @ResponseBody
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(EntityAlreadyExistsException.class)
+    String handleException(EntityAlreadyExistsException e){ return e.getMessage(); }
 }

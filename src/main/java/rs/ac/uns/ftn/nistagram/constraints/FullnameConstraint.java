@@ -1,16 +1,19 @@
 package rs.ac.uns.ftn.nistagram.constraints;
 
 import rs.ac.uns.ftn.nistagram.validators.FullnameValidator;
+
 import javax.validation.Constraint;
 import javax.validation.Payload;
 import java.lang.annotation.*;
 
 @Documented
 @Constraint(validatedBy = FullnameValidator.class)
-@Target({ ElementType.FIELD })
+@Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface FullnameConstraint {
     String message() default "Provided full name is invalid";
+
     Class<?>[] groups() default {};
+
     Class<? extends Payload>[] payload() default {};
 }

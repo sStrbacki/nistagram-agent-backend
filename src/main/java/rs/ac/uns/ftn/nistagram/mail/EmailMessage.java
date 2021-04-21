@@ -1,5 +1,6 @@
 package rs.ac.uns.ftn.nistagram.mail;
 
+import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.Async;
@@ -24,7 +25,7 @@ public abstract class EmailMessage<T> {
         mailMessage.setText(formatMessage(entity));
         try {
             mailSender.send(mailMessage);
-        } catch (Exception e) {
+        } catch (MailException e) {
             e.printStackTrace();
         }
     }
