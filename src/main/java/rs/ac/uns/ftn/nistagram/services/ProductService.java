@@ -10,7 +10,7 @@ import java.util.List;
 
 @Service
 public class ProductService {
-    private ProductRepository productRepository;
+    private final ProductRepository productRepository;
 
     public ProductService(ProductRepository productRepository) {
         this.productRepository = productRepository;
@@ -30,7 +30,7 @@ public class ProductService {
     }
 
     public void update(long id, Product product) {
-        if(productRepository.existsById(id)) {
+        if (productRepository.existsById(id)) {
             product.setId(id);
             productRepository.save(product);
         } else {
