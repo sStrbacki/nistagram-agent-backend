@@ -2,7 +2,7 @@ package rs.ac.uns.ftn.nistagram.exceptions;
 
 import javax.persistence.PersistenceException;
 
-public class EntityNotFoundException extends PersistenceException {
+public class EntityNotFoundException extends ApplicationException {
     public EntityNotFoundException() {
         super("Entity not found.");
     }

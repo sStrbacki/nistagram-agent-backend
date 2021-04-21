@@ -3,8 +3,9 @@ package rs.ac.uns.ftn.nistagram.domain;
 import javax.persistence.*;
 
 @Entity
-@Table(name="products")
+@Table(name = "products")
 public class Product {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
