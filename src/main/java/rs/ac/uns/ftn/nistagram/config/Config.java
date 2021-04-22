@@ -1,6 +1,7 @@
 package rs.ac.uns.ftn.nistagram.config;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.PathSelectors;
@@ -10,6 +11,9 @@ import springfox.documentation.spring.web.plugins.Docket;
 
 @Configuration
 public class Config {
+    @Value("${nistagram.content.images}")
+    private String imagePath;
+
     @Bean
     public ModelMapper modelMapper() {
         return new ModelMapper();
@@ -23,5 +27,13 @@ public class Config {
                 .apis(RequestHandlerSelectors.any())
                 .paths(PathSelectors.any())
                 .build();
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 }
