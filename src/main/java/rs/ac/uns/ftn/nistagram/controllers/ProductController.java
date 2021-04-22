@@ -8,6 +8,7 @@ import rs.ac.uns.ftn.nistagram.controllers.DTOs.ProductDTO;
 import rs.ac.uns.ftn.nistagram.domain.Product;
 import rs.ac.uns.ftn.nistagram.services.ProductService;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,7 +35,7 @@ public class ProductController {
     }
 
     @PostMapping
-    public ProductDTO add(@RequestBody ProductDTO dto) {
+    public ProductDTO add(@Valid @RequestBody ProductDTO dto) {
         return mapper.map(
                 productService.add(mapper.map(dto, Product.class)),
                 ProductDTO.class);
@@ -46,7 +47,7 @@ public class ProductController {
     }
 
     @PutMapping("{id}")
-    public void update(@PathVariable long id, @RequestBody ProductDTO dto) {
+    public void update(@PathVariable long id, @Valid @RequestBody ProductDTO dto) {
         productService.update(id, mapper.map(dto, Product.class));
     }
 
