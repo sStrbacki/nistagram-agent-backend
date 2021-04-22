@@ -1,6 +1,7 @@
 package rs.ac.uns.ftn.nistagram.config;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -12,6 +13,9 @@ import springfox.documentation.spring.web.plugins.Docket;
 
 @Configuration
 public class Config {
+    @Value("${nistagram.content.images}")
+    private String imagePath;
+
     @Bean
     public ModelMapper modelMapper() {
         return new ModelMapper();
@@ -19,6 +23,7 @@ public class Config {
 
     @Bean
     public Docket api() {
+
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
                 .apis(RequestHandlerSelectors.any())
@@ -34,5 +39,11 @@ public class Config {
                 registry.addMapping("/**").allowedOrigins("http://localhost:8081");
             }
         };
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 }

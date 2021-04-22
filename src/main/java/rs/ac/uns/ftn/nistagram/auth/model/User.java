@@ -1,5 +1,6 @@
 package rs.ac.uns.ftn.nistagram.auth.model;
 
+import org.hibernate.annotations.Type;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,13 +20,12 @@ public class User implements UserDetails {
     private String username;
     // TODO Make this unique
     private String email;
-    private String name;
-    private String lastName;
-
+    private String fullName;
     private String passwordHash;
-
+    @Type(type = "uuid-char")
     private UUID uuid;
     private String role;
+    private boolean activated;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -98,19 +98,23 @@ public class User implements UserDetails {
         this.role = role;
     }
 
-    public String getName() {
-        return name;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
-    public String getLastName() {
-        return lastName;
+    public boolean isActivated() {
+        return activated;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setActivated(boolean activated) {
+        this.activated = activated;
+    }
+    public void activate(){
+        if(!activated)
+            activated = true;
     }
 }
