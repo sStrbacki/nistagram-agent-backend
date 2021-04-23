@@ -1,6 +1,6 @@
 package rs.ac.uns.ftn.nistagram.exceptions;
 
-public class EntityAlreadyExistsException extends RuntimeException {
+public class EntityAlreadyExistsException extends ApplicationException {
 
     public EntityAlreadyExistsException(){}
 

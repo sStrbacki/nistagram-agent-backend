@@ -4,10 +4,9 @@ import org.hibernate.annotations.Type;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import rs.ac.uns.ftn.nistagram.auth.identity.Identity;
+import rs.ac.uns.ftn.nistagram.domain.ShoppingCart;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
@@ -18,14 +17,25 @@ public class User implements Identity {
 
     @Id
     private String username;
+
     // TODO Make this unique
     private String email;
+
     private String fullName;
+
     private String passwordHash;
+
     @Type(type = "uuid-char")
     private UUID uuid;
+
     private String role;
+
     private boolean activated;
+
+
+
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "owner")
+    private ShoppingCart shoppingCart;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -113,6 +123,18 @@ public class User implements Identity {
     public void setActivated(boolean activated) {
         this.activated = activated;
     }
+
+    public ShoppingCart getShoppingCart() {
+        if(shoppingCart.isEmpty())
+            return new ShoppingCart(this);
+
+        return shoppingCart;
+    }
+
+    public void setShoppingCart(ShoppingCart shoppingCart) {
+        this.shoppingCart = shoppingCart;
+    }
+
     public void activate(){
         if(!activated)
             activated = true;
