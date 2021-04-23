@@ -1,9 +1,9 @@
-package rs.ac.uns.ftn.nistagram.auth.user;
+package rs.ac.uns.ftn.nistagram.auth.model;
 
 import org.hibernate.annotations.Type;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import rs.ac.uns.ftn.nistagram.auth.identity.Identity;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -14,7 +14,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "users")
-public class User implements Identity {
+public class User implements UserDetails {
 
     @Id
     private String username;

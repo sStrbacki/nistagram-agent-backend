@@ -29,5 +29,4 @@ public class WebSecurityConfig implements WebMvcConfigurer {
                 .addResourceHandler("/content/**")
                 .addResourceLocations("file:\\\\\\" + config.getImagePath() + "\\");
     }
-
 }
