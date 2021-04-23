@@ -19,10 +19,10 @@ import java.io.IOException;
 @Component
 public class AuthFilter extends OncePerRequestFilter {
 
-    private final JwtService<IdentityToken> jwtService;
+    private final JwtService jwtService;
 
-    public AuthFilter() {
-        this.jwtService = new JwtService<>(IdentityToken.class);
+    public AuthFilter(JwtService jwtService) {
+        this.jwtService = jwtService;
     }
 
     protected void doFilterInternal(
@@ -49,7 +49,7 @@ public class AuthFilter extends OncePerRequestFilter {
         String jwt = headerTokens[1];
         IdentityToken identity;
         try {
-            identity = jwtService.decrypt(jwt);
+            identity = jwtService.decrypt(jwt, IdentityToken.class);
         }
         catch(AuthorizationException e) {
             chain.doFilter(request, response);

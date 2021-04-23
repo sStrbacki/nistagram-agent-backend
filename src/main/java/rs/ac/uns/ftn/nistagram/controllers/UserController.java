@@ -3,9 +3,9 @@ package rs.ac.uns.ftn.nistagram.controllers;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import rs.ac.uns.ftn.nistagram.auth.user.User;
+import rs.ac.uns.ftn.nistagram.auth.model.User;
+import rs.ac.uns.ftn.nistagram.auth.service.UserService;
 import rs.ac.uns.ftn.nistagram.controllers.DTOs.RegistrationRequestDTO;
-import rs.ac.uns.ftn.nistagram.services.UserService;
 
 import javax.validation.Valid;
 

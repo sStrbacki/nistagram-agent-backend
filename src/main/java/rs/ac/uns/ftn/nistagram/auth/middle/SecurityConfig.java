@@ -7,6 +7,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.accept.ContentNegotiationStrategy;
+
 import javax.servlet.http.HttpServletResponse;
 
 @Configuration
@@ -37,5 +39,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .and()
 
             .addFilterAfter(authFilter, UsernamePasswordAuthenticationFilter.class);
+    }
+
+    @Override
+    public void setContentNegotationStrategy(ContentNegotiationStrategy contentNegotiationStrategy) {
+        super.setContentNegotationStrategy(contentNegotiationStrategy);
     }
 }

@@ -36,9 +36,11 @@ public class Config {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**").allowedOrigins("http://localhost:8081");
+                registry.addMapping("/**");
             }
         };
+    }
+
     public String getImagePath() {
         return imagePath;
     }

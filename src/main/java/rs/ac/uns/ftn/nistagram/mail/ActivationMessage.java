@@ -1,7 +1,7 @@
 package rs.ac.uns.ftn.nistagram.mail;
 
 import org.springframework.mail.javamail.JavaMailSender;
-import rs.ac.uns.ftn.nistagram.auth.user.User;
+import rs.ac.uns.ftn.nistagram.auth.model.User;
 
 public class ActivationMessage extends EmailMessage<User> {
 
