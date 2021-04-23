@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import rs.ac.uns.ftn.nistagram.auth.model.User;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, String> {
@@ -14,6 +15,6 @@ public interface UserRepository extends JpaRepository<User, String> {
     @Query("select u from User u where u.username = ?1")
     Optional<User> getByUsername(String username);
 
-    @Query(value = "select * from users where uuid=:uuid", nativeQuery = true)
-    User find(@Param("uuid") String uuid);
+    @Query(value = "select u from User u where u.uuid = uuid")
+    Optional<User> findByUUID(@Param("uuid") UUID uuid);
 }

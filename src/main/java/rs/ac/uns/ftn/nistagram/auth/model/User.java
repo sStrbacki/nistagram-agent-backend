@@ -69,7 +69,6 @@ public class User implements UserDetails {
         this.username = username;
     }
 
-    @Override
     public String getPassword() {
         throw new RuntimeException("Password is not available in its pure form.");
     }

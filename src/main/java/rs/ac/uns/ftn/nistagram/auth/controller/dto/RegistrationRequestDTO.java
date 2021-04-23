@@ -1,4 +1,4 @@
-package rs.ac.uns.ftn.nistagram.controllers.DTOs;
+package rs.ac.uns.ftn.nistagram.auth.controller.dto;
 
 import rs.ac.uns.ftn.nistagram.constraints.EmailConstraint;
 import rs.ac.uns.ftn.nistagram.constraints.FullnameConstraint;
