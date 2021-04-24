@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("api/products")
+@RequestMapping("api/product")
 public class ProductController {
     private final ProductService productService;
     private final ModelMapper mapper;
@@ -24,7 +24,6 @@ public class ProductController {
     }
 
     @GetMapping
-    @Secured("ROLE_GUEST")
     public ResponseEntity<List<ProductDTO>> getAll() {
         List<ProductDTO> productDtoList =
                 this.productService.getAll().stream()
@@ -33,6 +32,15 @@ public class ProductController {
 
         return ResponseEntity.ok(productDtoList);
     }
+    @GetMapping("available")
+    public ResponseEntity<List<ProductDTO>> getAvailable(){
+        List<ProductDTO>  products = productService.getAvailable()
+                                        .stream()
+                                        .map(product -> mapper.map(product, ProductDTO.class))
+                                        .collect(Collectors.toList());
+        return ResponseEntity.ok(products);
+    }
+
 
     @PostMapping
     public ProductDTO add(@Valid @RequestBody ProductDTO dto) {

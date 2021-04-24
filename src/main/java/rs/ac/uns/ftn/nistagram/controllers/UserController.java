@@ -10,7 +10,7 @@ import rs.ac.uns.ftn.nistagram.services.UserService;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("api/users")
+@RequestMapping("api/user")
 public class UserController {
 
     private final ModelMapper mapper;

@@ -53,4 +53,8 @@ public class Product {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
+
+    public boolean isAvailable() {
+        return this.quantity > 0;
+    }
 }
