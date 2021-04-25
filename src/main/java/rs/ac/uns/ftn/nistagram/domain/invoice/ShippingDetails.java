@@ -58,4 +58,16 @@ public class ShippingDetails {
     public void setAddress(Address address) {
         this.address = address;
     }
+
+    public void reject() {
+        this.shippingStatus = ShippingStatus.REJECTED;
+    }
+    public void accept() {
+        this.shippingStatus = ShippingStatus.SHIPPED;
+    }
+    public boolean isPending() {
+        return this.shippingStatus == ShippingStatus.PENDING;
+    }
+
+
 }

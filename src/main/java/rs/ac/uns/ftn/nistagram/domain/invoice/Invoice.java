@@ -60,4 +60,17 @@ public class Invoice {
     public void setShippingDetails(ShippingDetails shippingDetails) {
         this.shippingDetails = shippingDetails;
     }
+
+    public void reject() {
+        this.shippingDetails.reject();
+    }
+    public void accept() {
+        this.shippingDetails.accept();
+    }
+
+    public boolean isPending() {
+        return this.shippingDetails.isPending();
+    }
+
+
 }

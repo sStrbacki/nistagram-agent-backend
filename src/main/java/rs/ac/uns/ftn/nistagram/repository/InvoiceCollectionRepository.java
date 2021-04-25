@@ -7,4 +7,5 @@ public interface InvoiceCollectionRepository extends JpaRepository<InvoiceCollec
 
     @Query(value = "select distinct ic from invoice_collections ic where ic.owner.username = :username ")
     InvoiceCollection findInvoicesByOwnersId(String username);
+
 }
