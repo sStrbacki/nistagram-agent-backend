@@ -2,8 +2,8 @@ package rs.ac.uns.ftn.nistagram.services;
 
 import org.springframework.stereotype.Service;
 import rs.ac.uns.ftn.nistagram.auth.user.UserRepository;
-import rs.ac.uns.ftn.nistagram.controllers.DTOs.ShoppingCartEntryDTO;
-import rs.ac.uns.ftn.nistagram.controllers.DTOs.ShoppingCartItemRemovalDTO;
+import rs.ac.uns.ftn.nistagram.controllers.DTOs.cart.ShoppingCartEntryDTO;
+import rs.ac.uns.ftn.nistagram.controllers.DTOs.cart.ShoppingCartItemRemovalDTO;
 import rs.ac.uns.ftn.nistagram.domain.cart.ShoppingCart;
 import rs.ac.uns.ftn.nistagram.domain.cart.ShoppingCartItem;
 import rs.ac.uns.ftn.nistagram.exceptions.EntityNotFoundException;

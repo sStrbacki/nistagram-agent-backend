@@ -1,6 +1,9 @@
 package rs.ac.uns.ftn.nistagram.domain.invoice;
 
+import rs.ac.uns.ftn.nistagram.domain.cart.ShoppingCartItem;
+
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity(name = "invoice_unit_collections")
@@ -16,6 +19,14 @@ public class InvoiceUnitCollection {
 
     @OneToMany(mappedBy = "invoiceUnitCollection", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<InvoiceUnit> invoiceUnits;
+
+    public InvoiceUnitCollection() {
+    }
+
+    public InvoiceUnitCollection(List<ShoppingCartItem> items, Invoice invoice) {
+        populateInvoiceUnits(items);
+        this.invoice = invoice;
+    }
 
     public long getId() {
         return id;
@@ -39,5 +50,13 @@ public class InvoiceUnitCollection {
 
     public void setInvoiceUnits(List<InvoiceUnit> invoiceUnits) {
         this.invoiceUnits = invoiceUnits;
+    }
+
+
+    private void populateInvoiceUnits(List<ShoppingCartItem> items) {
+        if(items == null)
+            this.invoiceUnits = new ArrayList<>();
+        for(var item : items)
+            invoiceUnits.add(new InvoiceUnit(item, this));
     }
 }

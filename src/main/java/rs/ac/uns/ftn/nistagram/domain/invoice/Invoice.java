@@ -1,5 +1,8 @@
 package rs.ac.uns.ftn.nistagram.domain.invoice;
+
+import rs.ac.uns.ftn.nistagram.domain.cart.ShoppingCartItem;
 import javax.persistence.*;
+import java.util.List;
 
 @Entity(name = "invoices")
 public class Invoice {
@@ -17,6 +20,14 @@ public class Invoice {
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "invoice")
     private ShippingDetails shippingDetails;
+
+    public Invoice(){}
+
+    public Invoice(List<ShoppingCartItem> items, Address address, InvoiceCollection invoiceCollection) {
+        this.invoiceCollection = invoiceCollection;
+        this.invoiceUnitCollection = new InvoiceUnitCollection(items, this);
+        this.shippingDetails = new ShippingDetails(address, this);
+    }
 
     public long getId() {
         return id;

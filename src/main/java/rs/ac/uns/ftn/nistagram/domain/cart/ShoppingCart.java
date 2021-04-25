@@ -84,4 +84,8 @@ public class ShoppingCart {
                                     .findFirst()
                                     .get());
     }
+
+    public void clearCart() {
+        this.shoppingCartItems.clear();
+    }
 }

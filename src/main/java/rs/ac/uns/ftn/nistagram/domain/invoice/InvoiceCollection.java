@@ -1,8 +1,10 @@
 package rs.ac.uns.ftn.nistagram.domain.invoice;
 
 import rs.ac.uns.ftn.nistagram.auth.user.User;
+import rs.ac.uns.ftn.nistagram.domain.cart.ShoppingCartItem;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity(name = "invoice_collections")
@@ -18,6 +20,13 @@ public class InvoiceCollection {
 
     @OneToMany(mappedBy = "invoiceCollection", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Invoice> invoices;
+
+    public InvoiceCollection(){}
+
+    public InvoiceCollection(User owner) {
+        this.owner = owner;
+        this.invoices = new ArrayList<>();
+    }
 
     public long getId() {
         return id;
@@ -41,5 +50,9 @@ public class InvoiceCollection {
 
     public void setInvoices(List<Invoice> invoices) {
         this.invoices = invoices;
+    }
+    
+    public void addInvoices(List<ShoppingCartItem> items, Address address) {
+        invoices.add(new Invoice(items, address, this));
     }
 }

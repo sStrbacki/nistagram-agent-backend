@@ -18,6 +18,15 @@ public class ShippingDetails {
     @OneToOne(cascade = CascadeType.ALL)
     private Address address;
 
+    public ShippingDetails() {
+    }
+
+    public ShippingDetails(Address address, Invoice invoice) {
+        this.invoice = invoice;
+        this.address = address;
+        this.shippingStatus = ShippingStatus.PENDING;
+    }
+
     public long getId() {
         return id;
     }

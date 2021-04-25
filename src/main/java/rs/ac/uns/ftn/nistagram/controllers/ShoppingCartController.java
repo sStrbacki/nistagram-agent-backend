@@ -3,9 +3,9 @@ package rs.ac.uns.ftn.nistagram.controllers;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import rs.ac.uns.ftn.nistagram.controllers.DTOs.ShoppingCartEntryDTO;
-import rs.ac.uns.ftn.nistagram.controllers.DTOs.ShoppingCartItemRemovalDTO;
-import rs.ac.uns.ftn.nistagram.controllers.DTOs.ShoppingCartResponseDTO;
+import rs.ac.uns.ftn.nistagram.controllers.DTOs.cart.ShoppingCartEntryDTO;
+import rs.ac.uns.ftn.nistagram.controllers.DTOs.cart.ShoppingCartItemRemovalDTO;
+import rs.ac.uns.ftn.nistagram.controllers.DTOs.cart.ShoppingCartItemDTO;
 import rs.ac.uns.ftn.nistagram.services.ShoppingCartService;
 
 import java.util.List;
@@ -35,11 +35,11 @@ public class ShoppingCartController {
     }
     //TODO: remove when jwt is implemented
     @GetMapping("/user/{username}")
-    public ResponseEntity<List<ShoppingCartResponseDTO>> getShoppingCartItems(@PathVariable String username){
+    public ResponseEntity<List<ShoppingCartItemDTO>> getShoppingCartItems(@PathVariable String username){
 
         return ResponseEntity.ok(service.getShoppingCartItems(username)
                                         .stream()
-                                        .map(item -> mapper.map(item,ShoppingCartResponseDTO.class))
+                                        .map(item -> mapper.map(item, ShoppingCartItemDTO.class))
                                         .collect(Collectors.toList()));
     }
 

@@ -1,6 +1,7 @@
 package rs.ac.uns.ftn.nistagram.domain.invoice;
 
 import rs.ac.uns.ftn.nistagram.domain.Product;
+import rs.ac.uns.ftn.nistagram.domain.cart.ShoppingCartItem;
 
 import javax.persistence.*;
 
@@ -20,6 +21,15 @@ public class InvoiceUnit {
     private Product product;
 
     private int quantity;
+
+    public InvoiceUnit() {
+    }
+
+    public InvoiceUnit(ShoppingCartItem item, InvoiceUnitCollection invoiceUnitCollection) {
+        this.invoiceUnitCollection = invoiceUnitCollection;
+        this.product = item.getProduct();
+        this.quantity = item.getQuantity();
+    }
 
     public long getId() {
         return id;

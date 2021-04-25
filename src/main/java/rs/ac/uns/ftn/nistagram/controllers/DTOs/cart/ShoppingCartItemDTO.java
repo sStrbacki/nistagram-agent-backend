@@ -1,6 +1,6 @@
-package rs.ac.uns.ftn.nistagram.controllers.DTOs;
+package rs.ac.uns.ftn.nistagram.controllers.DTOs.cart;
 
-public class ShoppingCartResponseDTO {
+public class ShoppingCartItemDTO {
 
     private long id;
     private ShoppingCartProductDTO product;

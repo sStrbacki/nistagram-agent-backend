@@ -1,4 +1,4 @@
-package rs.ac.uns.ftn.nistagram.controllers.DTOs;
+package rs.ac.uns.ftn.nistagram.controllers.DTOs.cart;
 
 public class ShoppingCartEntryDTO {
 
