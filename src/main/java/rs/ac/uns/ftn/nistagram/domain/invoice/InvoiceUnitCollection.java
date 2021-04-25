@@ -54,7 +54,7 @@ public class InvoiceUnitCollection {
 
 
     private void populateInvoiceUnits(List<ShoppingCartItem> items) {
-        if(items == null)
+        if(this.invoiceUnits == null)
             this.invoiceUnits = new ArrayList<>();
         for(var item : items)
             invoiceUnits.add(new InvoiceUnit(item, this));

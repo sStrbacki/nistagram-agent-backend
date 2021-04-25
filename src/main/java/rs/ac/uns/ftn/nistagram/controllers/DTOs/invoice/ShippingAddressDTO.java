@@ -1,7 +1,5 @@
 package rs.ac.uns.ftn.nistagram.controllers.DTOs.invoice;
 
-import rs.ac.uns.ftn.nistagram.domain.invoice.Address;
-
 public class ShippingAddressDTO {
 
     private String address;

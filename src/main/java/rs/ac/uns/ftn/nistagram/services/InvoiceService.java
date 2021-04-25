@@ -10,6 +10,7 @@ import rs.ac.uns.ftn.nistagram.exceptions.EntityNotFoundException;
 import rs.ac.uns.ftn.nistagram.repository.InvoiceCollectionRepository;
 import rs.ac.uns.ftn.nistagram.repository.ShoppingCartRepository;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -27,6 +28,7 @@ public class InvoiceService {
         this.userRepository = userRepository;
     }
 
+    @Transactional
     public void checkout(InvoiceRequestDTO invoiceRequest){
 
         validateUser(invoiceRequest.getUsername());
