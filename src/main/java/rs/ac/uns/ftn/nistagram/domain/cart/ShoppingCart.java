@@ -1,12 +1,12 @@
-package rs.ac.uns.ftn.nistagram.domain;
+package rs.ac.uns.ftn.nistagram.domain.cart;
 
 import rs.ac.uns.ftn.nistagram.auth.user.User;
+import rs.ac.uns.ftn.nistagram.domain.Product;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Entity(name = "shopping_carts")
 public class ShoppingCart {

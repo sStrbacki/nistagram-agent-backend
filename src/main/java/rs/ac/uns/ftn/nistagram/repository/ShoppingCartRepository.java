@@ -2,7 +2,7 @@ package rs.ac.uns.ftn.nistagram.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import rs.ac.uns.ftn.nistagram.domain.ShoppingCart;
+import rs.ac.uns.ftn.nistagram.domain.cart.ShoppingCart;
 
 public interface ShoppingCartRepository extends JpaRepository<ShoppingCart,Long> {
 

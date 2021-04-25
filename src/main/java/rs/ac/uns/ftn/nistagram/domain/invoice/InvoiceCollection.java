@@ -1,0 +1,45 @@
+package rs.ac.uns.ftn.nistagram.domain.invoice;
+
+import rs.ac.uns.ftn.nistagram.auth.user.User;
+
+import javax.persistence.*;
+import java.util.List;
+
+@Entity(name = "invoice_collections")
+public class InvoiceCollection {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+
+    @OneToOne
+    @JoinColumn(name = "owner_id")
+    private User owner;
+
+    @OneToMany(mappedBy = "invoiceCollection", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Invoice> invoices;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
+    }
+
+    public List<Invoice> getInvoices() {
+        return invoices;
+    }
+
+    public void setInvoices(List<Invoice> invoices) {
+        this.invoices = invoices;
+    }
+}

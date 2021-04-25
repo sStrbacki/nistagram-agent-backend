@@ -4,7 +4,8 @@ import org.hibernate.annotations.Type;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import rs.ac.uns.ftn.nistagram.auth.identity.Identity;
-import rs.ac.uns.ftn.nistagram.domain.ShoppingCart;
+import rs.ac.uns.ftn.nistagram.domain.cart.ShoppingCart;
+import rs.ac.uns.ftn.nistagram.domain.invoice.InvoiceCollection;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -32,10 +33,11 @@ public class User implements Identity {
 
     private boolean activated;
 
-
-
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "owner")
     private ShoppingCart shoppingCart;
+
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "owner")
+    private InvoiceCollection invoices;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -118,6 +120,14 @@ public class User implements Identity {
 
     public boolean isActivated() {
         return activated;
+    }
+
+    public InvoiceCollection getInvoices() {
+        return invoices;
+    }
+
+    public void setInvoices(InvoiceCollection invoices) {
+        this.invoices = invoices;
     }
 
     public void setActivated(boolean activated) {

@@ -1,9 +1,13 @@
-package rs.ac.uns.ftn.nistagram.domain;
+package rs.ac.uns.ftn.nistagram.domain.cart;
+
+import rs.ac.uns.ftn.nistagram.domain.Product;
+import rs.ac.uns.ftn.nistagram.domain.cart.ShoppingCart;
 
 import javax.persistence.*;
 
 @Entity(name = "shopping_cart_items")
 public class ShoppingCartItem {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
