@@ -1,5 +1,6 @@
 package rs.ac.uns.ftn.nistagram.controllers.DTOs.invoice;
 
+
 import java.util.List;
 
 public class InvoiceDTO {

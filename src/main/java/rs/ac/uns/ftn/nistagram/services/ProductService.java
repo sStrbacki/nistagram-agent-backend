@@ -2,7 +2,6 @@ package rs.ac.uns.ftn.nistagram.services;
 
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
-import rs.ac.uns.ftn.nistagram.controllers.DTOs.ProductDTO;
 import rs.ac.uns.ftn.nistagram.domain.Product;
 import rs.ac.uns.ftn.nistagram.exceptions.EntityNotFoundException;
 import rs.ac.uns.ftn.nistagram.repository.ProductRepository;

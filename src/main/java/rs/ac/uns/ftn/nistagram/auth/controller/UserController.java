@@ -2,13 +2,11 @@ package rs.ac.uns.ftn.nistagram.auth.controller;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 import rs.ac.uns.ftn.nistagram.auth.controller.dto.PasswordResetDTO;
-import rs.ac.uns.ftn.nistagram.auth.model.IdentityToken;
+import rs.ac.uns.ftn.nistagram.auth.controller.dto.RegistrationRequestDTO;
 import rs.ac.uns.ftn.nistagram.auth.model.User;
 import rs.ac.uns.ftn.nistagram.auth.service.UserService;
-import rs.ac.uns.ftn.nistagram.auth.controller.dto.RegistrationRequestDTO;
 
 import javax.validation.Valid;
 import java.util.UUID;

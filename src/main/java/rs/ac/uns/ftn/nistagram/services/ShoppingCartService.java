@@ -1,7 +1,7 @@
 package rs.ac.uns.ftn.nistagram.services;
 
 import org.springframework.stereotype.Service;
-import rs.ac.uns.ftn.nistagram.auth.user.UserRepository;
+import rs.ac.uns.ftn.nistagram.auth.repository.UserRepository;
 import rs.ac.uns.ftn.nistagram.controllers.DTOs.cart.ShoppingCartEntryDTO;
 import rs.ac.uns.ftn.nistagram.controllers.DTOs.cart.ShoppingCartItemRemovalDTO;
 import rs.ac.uns.ftn.nistagram.domain.cart.ShoppingCart;

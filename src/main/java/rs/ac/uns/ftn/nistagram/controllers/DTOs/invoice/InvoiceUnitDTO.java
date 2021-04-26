@@ -1,7 +1,7 @@
 package rs.ac.uns.ftn.nistagram.controllers.DTOs.invoice;
 
 
-import rs.ac.uns.ftn.nistagram.auth.controller.dto.ProductDTO;
+import rs.ac.uns.ftn.nistagram.controllers.DTOs.ProductDTO;
 
 public class InvoiceUnitDTO {
 
