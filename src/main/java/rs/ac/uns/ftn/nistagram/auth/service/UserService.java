@@ -41,7 +41,7 @@ public class UserService {
 
     public String login(String username, String password) {
         Optional<User> optionalUser = userRepository.getByUsername(username);
-        if (optionalUser.isEmpty()) throw new UsernameInvalidException();
+        if (optionalUser.isEmpty()) throw new InvalidLoginCredentialsException();
         User user = optionalUser.get();
 
         boolean success = passwordHandler.checkPass(password, user.getPasswordHash());
@@ -58,6 +58,7 @@ public class UserService {
 
         user.setPasswordHash(passwordHandler.hash(password));
         user.setUuid(UUID.randomUUID());
+        user.setUserRole();
 
         userRepository.save(user);
         emailService.sendActivationMessage(user);

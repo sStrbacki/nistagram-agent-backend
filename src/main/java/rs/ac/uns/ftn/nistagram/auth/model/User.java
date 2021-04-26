@@ -148,4 +148,8 @@ public class User implements UserDetails {
         if(!activated)
             activated = true;
     }
+
+    public void setUserRole() {
+        this.role = "ROLE_USER";
+    }
 }
