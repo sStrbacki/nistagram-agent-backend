@@ -9,7 +9,7 @@ public class PasswordResetMessage extends EmailMessage<PasswordResetForm> {
         super(mailSender, entity);
     }
 
-    private static final String URL = EmailService.ROOT_URL + "users/password-reset/";
+    private static final String URL = EmailService.FRONT_ROOT_URL + "password-reset/";
 
     @Override
     protected String formatMessage(PasswordResetForm passResetForm) {

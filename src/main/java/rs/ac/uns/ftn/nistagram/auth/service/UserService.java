@@ -75,7 +75,6 @@ public class UserService {
         userRepository.save(user);
     }
 
-    @Transactional
     public void requestPasswordReset(String username) {
         User user = userRepository.findById(username).orElseThrow(EntityNotFoundException::new);
         PasswordResetForm passwordResetForm = new PasswordResetForm(user.getUuid());
