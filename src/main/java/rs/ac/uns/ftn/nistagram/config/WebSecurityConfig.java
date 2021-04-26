@@ -18,7 +18,11 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**").exposedHeaders("Authorization");
+        registry.addMapping("/**")
+                .allowedOrigins("*")
+                .allowedHeaders("*")
+                .allowedMethods("GET","POST","PUT","DELETE","OPTIONS")
+                .exposedHeaders("Authorization");
     }
 
     @Override

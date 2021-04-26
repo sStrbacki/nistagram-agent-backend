@@ -31,7 +31,6 @@ public class Config {
                 .build();
     }
 
-
     public String getImagePath() {
         return imagePath;
     }
