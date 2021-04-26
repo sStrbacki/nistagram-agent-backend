@@ -1,6 +1,6 @@
 package rs.ac.uns.ftn.nistagram.domain.cart;
 
-import rs.ac.uns.ftn.nistagram.auth.user.User;
+import rs.ac.uns.ftn.nistagram.auth.model.User;
 import rs.ac.uns.ftn.nistagram.domain.Product;
 
 import javax.persistence.*;

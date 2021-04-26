@@ -1,9 +1,9 @@
-package rs.ac.uns.ftn.nistagram.auth.user;
+package rs.ac.uns.ftn.nistagram.auth.model;
 
 import org.hibernate.annotations.Type;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import rs.ac.uns.ftn.nistagram.auth.identity.Identity;
+import org.springframework.security.core.userdetails.UserDetails;
 import rs.ac.uns.ftn.nistagram.domain.cart.ShoppingCart;
 import rs.ac.uns.ftn.nistagram.domain.invoice.InvoiceCollection;
 
@@ -14,7 +14,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "users")
-public class User implements Identity {
+public class User implements UserDetails {
 
     @Id
     private String username;
@@ -81,7 +81,6 @@ public class User implements Identity {
         this.username = username;
     }
 
-    @Override
     public String getPassword() {
         throw new RuntimeException("Password is not available in its pure form.");
     }

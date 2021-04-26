@@ -1,10 +1,10 @@
-package rs.ac.uns.ftn.nistagram.controllers;
+package rs.ac.uns.ftn.nistagram.controller;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
-import rs.ac.uns.ftn.nistagram.controllers.DTOs.ProductDTO;
+import rs.ac.uns.ftn.nistagram.auth.controller.dto.ProductDTO;
 import rs.ac.uns.ftn.nistagram.domain.Product;
 import rs.ac.uns.ftn.nistagram.services.ProductService;
 
