@@ -20,8 +20,7 @@ public class PasswordResetForm {
     private long validUntil;
     private boolean used;
 
-    @Value("${nistagram.auth.reset-valid-minutes}")
-    private static int RESET_VALID_MINUTES;
+    private static final int RESET_VALID_MINUTES = 10;
 
     public PasswordResetForm() {}
 

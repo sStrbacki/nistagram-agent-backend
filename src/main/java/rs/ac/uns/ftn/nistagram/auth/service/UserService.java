@@ -3,10 +3,7 @@ package rs.ac.uns.ftn.nistagram.auth.service;
 import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import rs.ac.uns.ftn.nistagram.auth.exceptions.InvalidLoginCredentialsException;
-import rs.ac.uns.ftn.nistagram.auth.exceptions.PasswordResetFormAlreadyUsedException;
-import rs.ac.uns.ftn.nistagram.auth.exceptions.PasswordResetFormExpiredException;
-import rs.ac.uns.ftn.nistagram.auth.exceptions.UsernameInvalidException;
+import rs.ac.uns.ftn.nistagram.auth.exceptions.*;
 import rs.ac.uns.ftn.nistagram.auth.model.IdentityToken;
 import rs.ac.uns.ftn.nistagram.auth.model.PasswordResetForm;
 import rs.ac.uns.ftn.nistagram.auth.model.User;
@@ -50,6 +47,8 @@ public class UserService {
         boolean success = passwordHandler.checkPass(password, user.getPasswordHash());
         if (!success) throw new InvalidLoginCredentialsException();
 
+        if (!user.isActivated()) throw new UserNotActivatedException();
+
         return jwtService.encrypt(new IdentityToken(user));
     }
 
@@ -87,7 +86,8 @@ public class UserService {
                 passResetRepository.findByUUIDPair(userUUID, resetUUID)
                         .orElseThrow(EntityNotFoundException::new);
 
-        if (passwordResetForm.isNonExpired()) throw new PasswordResetFormExpiredException();
+        System.out.println("Spremam se da proverim NonExpired");
+        if (!passwordResetForm.isNonExpired()) throw new PasswordResetFormExpiredException();
         if (passwordResetForm.isUsed()) throw new PasswordResetFormAlreadyUsedException();
 
         User user = userRepository.findByUUID(userUUID).orElseThrow(EntityNotFoundException::new);
