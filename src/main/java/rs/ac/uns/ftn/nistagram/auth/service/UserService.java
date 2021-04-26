@@ -86,7 +86,6 @@ public class UserService {
                 passResetRepository.findByUUIDPair(userUUID, resetUUID)
                         .orElseThrow(EntityNotFoundException::new);
 
-        System.out.println("Spremam se da proverim NonExpired");
         if (!passwordResetForm.isNonExpired()) throw new PasswordResetFormExpiredException();
         if (passwordResetForm.isUsed()) throw new PasswordResetFormAlreadyUsedException();
 

@@ -10,7 +10,7 @@ public class ActivationMessage extends EmailMessage<User> {
         super(mailSender, user);
     }
 
-    private static final String URL = EmailService.BACK_ROOT_URL + "users/activate/";
+    private static final String URL = EmailService.BACK_ROOT_URL + "user/activate/";
 
     @Override
     protected String formatMessage(User user) {

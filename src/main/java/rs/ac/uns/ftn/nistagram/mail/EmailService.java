@@ -1,6 +1,5 @@
 package rs.ac.uns.ftn.nistagram.mail;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import rs.ac.uns.ftn.nistagram.auth.model.PasswordResetForm;
