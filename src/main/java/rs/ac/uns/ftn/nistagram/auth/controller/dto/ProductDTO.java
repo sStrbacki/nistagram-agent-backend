@@ -1,4 +1,4 @@
-package rs.ac.uns.ftn.nistagram.controllers.DTOs;
+package rs.ac.uns.ftn.nistagram.auth.controller.dto;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
