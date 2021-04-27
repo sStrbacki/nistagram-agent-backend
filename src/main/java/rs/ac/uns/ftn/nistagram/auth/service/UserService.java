@@ -1,8 +1,10 @@
 package rs.ac.uns.ftn.nistagram.auth.service;
 
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Service;
 import rs.ac.uns.ftn.nistagram.auth.exceptions.*;
 import rs.ac.uns.ftn.nistagram.auth.model.PasswordResetForm;
+import rs.ac.uns.ftn.nistagram.auth.model.Role;
 import rs.ac.uns.ftn.nistagram.auth.model.User;
 import rs.ac.uns.ftn.nistagram.auth.repository.PasswordResetFormRepository;
 import rs.ac.uns.ftn.nistagram.auth.repository.RoleRepository;
@@ -11,8 +13,10 @@ import rs.ac.uns.ftn.nistagram.exceptions.EntityAlreadyExistsException;
 import rs.ac.uns.ftn.nistagram.exceptions.EntityNotFoundException;
 import rs.ac.uns.ftn.nistagram.mail.EmailService;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -106,5 +110,12 @@ public class UserService {
 
         passwordResetForm.setUsed(true);
         passResetRepository.save(passwordResetForm);
+    }
+
+    public List<String> getRoles(String username) {
+        User user = userRepository.getByUsername(username).orElseThrow(EntityAlreadyExistsException::new);
+        return user.getRoles().stream()
+                .map(Role::getId)
+                .collect(Collectors.toList());
     }
 }

@@ -79,6 +79,8 @@ public class AuthFilter extends OncePerRequestFilter {
                 user.getAuthorities()
         );
 
+        HttpUtil.setHttpRequestAttribute(request, HttpUtil.USERNAME_KEY, user.getUsername());
+
         auth.setDetails(
                 new WebAuthenticationDetailsSource().buildDetails(request)
         );
