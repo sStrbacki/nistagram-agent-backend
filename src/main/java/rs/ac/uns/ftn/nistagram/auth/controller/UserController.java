@@ -22,10 +22,12 @@ public class UserController {
 
     private final ModelMapper mapper;
     private final UserService userService;
+    private final HttpUtil httpUtil;
 
-    public UserController(ModelMapper mapper, UserService userService) {
+    public UserController(ModelMapper mapper, UserService userService, HttpUtil httpUtil) {
         this.mapper = mapper;
         this.userService = userService;
+        this.httpUtil = httpUtil;
     }
 
     @PostMapping
@@ -58,7 +60,7 @@ public class UserController {
 
     @GetMapping("role")
     public ResponseEntity<List<String>> getRole(HttpServletRequest request) {
-        String username = (String) HttpUtil.getHttpRequestAttribute(request, HttpUtil.USERNAME_KEY);
+        String username = (String) httpUtil.getHttpRequestAttribute(request, httpUtil.USERNAME_KEY);
         return ResponseEntity.ok(userService.getRoles(username));
     }
 }

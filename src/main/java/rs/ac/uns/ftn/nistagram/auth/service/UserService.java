@@ -44,23 +44,15 @@ public class UserService {
     }
 
     public User get(String username){
-        Optional<User> optionalUser = userRepository.getByUsername(username);
-        if (optionalUser.isEmpty()) throw new InvalidLoginCredentialsException();
-        var user = optionalUser.get();
-
+        User user = userRepository.getByUsername(username).orElseThrow(InvalidLoginCredentialsException::new);
         if (!user.isActivated()) throw new UserNotActivatedException();
-
         return user;
-
     }
     public String login(String username, String password) {
-        Optional<User> optionalUser = userRepository.getByUsername(username);
-        if (optionalUser.isEmpty()) throw new InvalidLoginCredentialsException();
-        User user = optionalUser.get();
+        User user = userRepository.getByUsername(username).orElseThrow(InvalidLoginCredentialsException::new);
 
         boolean success = passwordHandler.checkPass(password, user.getPasswordHash());
         if (!success) throw new InvalidLoginCredentialsException();
-
         if (!user.isActivated()) throw new UserNotActivatedException();
 
         return jwtService.encrypt(user.getUsername());
@@ -79,12 +71,7 @@ public class UserService {
     }
 
     public void activate(UUID uuid) {
-        Optional<User> optionalUser = userRepository.findByUUID(uuid);
-        if(optionalUser.isEmpty())
-            throw new EntityNotFoundException();
-
-        User user = optionalUser.get();
-
+        User user = userRepository.findByUUID(uuid).orElseThrow(EntityNotFoundException::new);
         user.activate();
         userRepository.save(user);
     }

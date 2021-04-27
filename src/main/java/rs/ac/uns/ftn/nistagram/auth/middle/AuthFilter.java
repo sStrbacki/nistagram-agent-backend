@@ -23,10 +23,12 @@ public class AuthFilter extends OncePerRequestFilter {
 
     private final JwtService jwtService;
     private final UserService userService;
+    private final HttpUtil httpUtil;
 
-    public AuthFilter(JwtService jwtService, UserService userService) {
+    public AuthFilter(JwtService jwtService, UserService userService, HttpUtil httpUtil) {
         this.jwtService = jwtService;
         this.userService = userService;
+        this.httpUtil = httpUtil;
     }
 
     protected void doFilterInternal(
@@ -79,7 +81,7 @@ public class AuthFilter extends OncePerRequestFilter {
                 user.getAuthorities()
         );
 
-        HttpUtil.setHttpRequestAttribute(request, HttpUtil.USERNAME_KEY, user.getUsername());
+        httpUtil.setHttpRequestAttribute(request, httpUtil.USERNAME_KEY, user.getUsername());
 
         auth.setDetails(
                 new WebAuthenticationDetailsSource().buildDetails(request)
