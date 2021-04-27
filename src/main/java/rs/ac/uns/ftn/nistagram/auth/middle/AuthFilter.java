@@ -7,8 +7,10 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 import rs.ac.uns.ftn.nistagram.auth.exceptions.AuthorizationException;
-import rs.ac.uns.ftn.nistagram.auth.model.IdentityToken;
+import rs.ac.uns.ftn.nistagram.auth.model.User;
 import rs.ac.uns.ftn.nistagram.auth.service.JwtService;
+import rs.ac.uns.ftn.nistagram.auth.service.UserService;
+import rs.ac.uns.ftn.nistagram.exceptions.ApplicationException;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -20,9 +22,11 @@ import java.io.IOException;
 public class AuthFilter extends OncePerRequestFilter {
 
     private final JwtService jwtService;
+    private final UserService userService;
 
-    public AuthFilter(JwtService jwtService) {
+    public AuthFilter(JwtService jwtService, UserService userService) {
         this.jwtService = jwtService;
+        this.userService = userService;
     }
 
     protected void doFilterInternal(
@@ -47,12 +51,23 @@ public class AuthFilter extends OncePerRequestFilter {
 
         // Check JWT validity from the given Bearer token
         String jwt = headerTokens[1];
-        IdentityToken identity;
+        String identity;
         try {
-            identity = jwtService.decrypt(jwt, IdentityToken.class);
+            identity = jwtService.decrypt(jwt, String.class);
+
         }
         catch(AuthorizationException e) {
             chain.doFilter(request, response);
+            return;
+        }
+
+        // Get User authorities
+
+        User user;
+        try{
+            user = userService.get(identity);
+        }catch (ApplicationException e){
+            chain.doFilter(request,response);
             return;
         }
 
@@ -61,7 +76,7 @@ public class AuthFilter extends OncePerRequestFilter {
         UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(
                 identity,
                 null,
-                identity.getAuthorities()
+                user.getAuthorities()
         );
 
         auth.setDetails(

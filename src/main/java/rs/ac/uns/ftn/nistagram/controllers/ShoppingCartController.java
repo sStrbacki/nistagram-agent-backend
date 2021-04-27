@@ -2,6 +2,7 @@ package rs.ac.uns.ftn.nistagram.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import rs.ac.uns.ftn.nistagram.controllers.DTOs.cart.ShoppingCartEntryDTO;
 import rs.ac.uns.ftn.nistagram.controllers.DTOs.cart.ShoppingCartItemRemovalDTO;
@@ -23,17 +24,22 @@ public class ShoppingCartController {
         this.mapper = mapper;
     }
 
+    @PreAuthorize("hasRole('USER') && hasAuthority('ADD_CART_ENTRY')")
     @PostMapping
     public ResponseEntity<?> add(@RequestBody ShoppingCartEntryDTO shoppingCartEntry){
         service.add(shoppingCartEntry);
         return ResponseEntity.ok("New shopping cart entry has been successfully added");
     }
+
+    @PreAuthorize("hasRole('USER') && hasAuthority('REMOVE_CART_ENTRY')")
     @DeleteMapping
     public ResponseEntity<?> delete(@RequestBody ShoppingCartItemRemovalDTO shoppingCartItemRemoval){
         service.delete(shoppingCartItemRemoval);
         return ResponseEntity.ok("Shopping cart entry has been successfully removed");
     }
+
     //TODO: remove when jwt is implemented
+    @PreAuthorize("hasRole('USER') && hasAuthority('GET_USER_CART')")
     @GetMapping("/user/{username}")
     public ResponseEntity<List<ShoppingCartItemDTO>> getShoppingCartItems(@PathVariable String username){
 

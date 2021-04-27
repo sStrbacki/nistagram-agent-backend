@@ -2,19 +2,18 @@ package rs.ac.uns.ftn.nistagram.auth.model;
 
 import org.hibernate.annotations.Type;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 import rs.ac.uns.ftn.nistagram.domain.cart.ShoppingCart;
 import rs.ac.uns.ftn.nistagram.domain.invoice.InvoiceCollection;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
 @Entity
 @Table(name = "users")
-public class User implements UserDetails {
+public class User {
 
     @Id
     private String username;
@@ -29,7 +28,8 @@ public class User implements UserDetails {
     @Type(type = "uuid-char")
     private UUID uuid;
 
-    private String role;
+    @ManyToMany(fetch = FetchType.EAGER)
+    private List<Role> roles = new ArrayList<>();
 
     private boolean activated;
 
@@ -39,29 +39,24 @@ public class User implements UserDetails {
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "owner")
     private InvoiceCollection invoices;
 
-    @Override
+
+
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(role));
+        var authorities = new ArrayList<GrantedAuthority>();
+        for(var role : roles) {
+            authorities.add(role);
+            authorities.addAll(role.getAllowedPermissions());
+        }
+        return authorities;
     }
 
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
+
+    public List<Role> getRoles(){
+        return roles;
     }
 
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
+    public void addRoles(Role role) {
+        roles.add(role);
     }
 
     public String getEmail() {
@@ -72,7 +67,6 @@ public class User implements UserDetails {
         this.email = email;
     }
 
-    @Override
     public String getUsername() {
         return username;
     }
@@ -99,14 +93,6 @@ public class User implements UserDetails {
 
     public void setUuid(UUID uuid) {
         this.uuid = uuid;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
     }
 
     public String getFullName() {
@@ -149,7 +135,4 @@ public class User implements UserDetails {
             activated = true;
     }
 
-    public void setUserRole() {
-        this.role = "ROLE_USER";
-    }
 }
