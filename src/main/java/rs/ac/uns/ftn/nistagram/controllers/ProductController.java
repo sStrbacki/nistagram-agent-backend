@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("api/product")
+
 public class ProductController {
     private final ProductService productService;
     private final ModelMapper mapper;
@@ -24,7 +25,7 @@ public class ProductController {
         this.mapper = mapper;
     }
 
-    @PreAuthorize("hasRole('ADMIN') && hasAuthority('GET_ALL_PRODUCTS')")
+    @Secured({"ROLE_ADMIN", "GET_ALL_PRODUCTS"})
     @GetMapping
     public ResponseEntity<List<ProductDTO>> getAll() {
         List<ProductDTO> productDtoList =
@@ -35,7 +36,7 @@ public class ProductController {
         return ResponseEntity.ok(productDtoList);
     }
 
-    @PreAuthorize("hasRole('USER') && hasAuthority('GET_AVAILABLE_PRODUCTS')")
+    @Secured({"ROLE_USER", "GET_AVAILABLE_PRODUCTS"})
     @GetMapping("available")
     public ResponseEntity<List<ProductDTO>> getAvailable(){
         List<ProductDTO>  products = productService.getAvailable()
@@ -45,7 +46,7 @@ public class ProductController {
         return ResponseEntity.ok(products);
     }
 
-    @PreAuthorize("hasRole('ADMIN') && hasAuthority('CREATE_PRODUCT')")
+    @Secured({"ROLE_ADMIN", "CREATE_PRODUCT"})
     @PostMapping
     public ProductDTO add(@Valid @RequestBody ProductDTO dto) {
         return mapper.map(
@@ -53,19 +54,19 @@ public class ProductController {
                 ProductDTO.class);
     }
 
-    @PreAuthorize("hasRole('ADMIN') && hasAuthority('GET_PRODUCT')")
+    @Secured({"ROLE_ADMIN", "GET_PRODUCT"})
     @GetMapping("{id}")
     public ProductDTO get(@PathVariable long id) {
         return mapper.map(this.productService.get(id), ProductDTO.class);
     }
 
-    @PreAuthorize("hasRole('ADMIN') && hasAuthority('UPDATE_PRODUCT')")
+    @Secured({"ROLE_ADMIN", "UPDATE_PRODUCT"})
     @PutMapping("{id}")
     public void update(@PathVariable long id, @Valid @RequestBody ProductDTO dto) {
         productService.update(id, mapper.map(dto, Product.class));
     }
 
-    @PreAuthorize("hasRole('ADMIN') && hasAuthority('DELETE_PRODUCT')")
+    @Secured({"ROLE_ADMIN", "DELETE_PRODUCT"})
     @DeleteMapping("{id}")
     public void delete(@PathVariable long id) {
         productService.delete(id);

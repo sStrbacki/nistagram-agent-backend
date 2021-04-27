@@ -1,5 +1,6 @@
 package rs.ac.uns.ftn.nistagram.image.controller;
 
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +19,7 @@ public class ImageController {
         this.imageService = imageService;
     }
 
-    @PreAuthorize("hasRole('ADMIN') && hasAuthority('POST_IMAGE')")
+    @Secured({"ROLE_ADMIN", "POST_IMAGE"})
     @PostMapping
     public String handleImageUpload(@RequestParam("image")MultipartFile file) {
         return imageService.store(file);
