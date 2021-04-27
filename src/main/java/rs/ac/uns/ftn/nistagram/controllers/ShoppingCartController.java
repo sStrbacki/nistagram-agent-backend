@@ -25,14 +25,14 @@ public class ShoppingCartController {
         this.mapper = mapper;
     }
 
-    @Secured({"ROLE_USER", "ADD_CART_ENTRY"})
+    @PreAuthorize("hasAuthority('ADD_CART_ENTRY')")
     @PostMapping
     public ResponseEntity<?> add(@RequestBody ShoppingCartEntryDTO shoppingCartEntry){
         service.add(shoppingCartEntry);
         return ResponseEntity.ok("New shopping cart entry has been successfully added");
     }
 
-    @Secured({"ROLE_USER", "REMOVE_CART_ENTRY"})
+    @PreAuthorize("hasAuthority('REMOVE_CART_ENTRY')")
     @DeleteMapping
     public ResponseEntity<?> delete(@RequestBody ShoppingCartItemRemovalDTO shoppingCartItemRemoval){
         service.delete(shoppingCartItemRemoval);
@@ -40,7 +40,7 @@ public class ShoppingCartController {
     }
 
     //TODO: remove when jwt is implemented
-    @Secured({"ROLE_USER", "GET_CART_ENTRY"})
+    @PreAuthorize("hasAuthority('GET_CART_ENTRY')")
     @GetMapping("/user/{username}")
     public ResponseEntity<List<ShoppingCartItemDTO>> getShoppingCartItems(@PathVariable String username){
 

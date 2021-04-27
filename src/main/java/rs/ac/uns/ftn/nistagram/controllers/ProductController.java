@@ -25,7 +25,7 @@ public class ProductController {
         this.mapper = mapper;
     }
 
-    @Secured({"ROLE_ADMIN", "GET_ALL_PRODUCTS"})
+    @PreAuthorize("hasAuthority('GET_ALL_PRODUCTS')")
     @GetMapping
     public ResponseEntity<List<ProductDTO>> getAll() {
         List<ProductDTO> productDtoList =
@@ -36,7 +36,7 @@ public class ProductController {
         return ResponseEntity.ok(productDtoList);
     }
 
-    @Secured({"ROLE_USER", "GET_AVAILABLE_PRODUCTS"})
+    @PreAuthorize("hasAuthority('GET_AVAILABLE_PRODUCTS')")
     @GetMapping("available")
     public ResponseEntity<List<ProductDTO>> getAvailable(){
         List<ProductDTO>  products = productService.getAvailable()
@@ -46,7 +46,7 @@ public class ProductController {
         return ResponseEntity.ok(products);
     }
 
-    @Secured({"ROLE_ADMIN", "CREATE_PRODUCT"})
+    @PreAuthorize("hasAuthority('CREATE_PRODUCT')")
     @PostMapping
     public ProductDTO add(@Valid @RequestBody ProductDTO dto) {
         return mapper.map(
@@ -54,19 +54,19 @@ public class ProductController {
                 ProductDTO.class);
     }
 
-    @Secured({"ROLE_ADMIN", "GET_PRODUCT"})
+    @PreAuthorize("hasAuthority('GET_PRODUCT')")
     @GetMapping("{id}")
     public ProductDTO get(@PathVariable long id) {
         return mapper.map(this.productService.get(id), ProductDTO.class);
     }
 
-    @Secured({"ROLE_ADMIN", "UPDATE_PRODUCT"})
+    @PreAuthorize("hasAuthority('UPDATE_PRODUCT')")
     @PutMapping("{id}")
     public void update(@PathVariable long id, @Valid @RequestBody ProductDTO dto) {
         productService.update(id, mapper.map(dto, Product.class));
     }
 
-    @Secured({"ROLE_ADMIN", "DELETE_PRODUCT"})
+    @PreAuthorize("hasAuthority('DELETE_PRODUCT')")
     @DeleteMapping("{id}")
     public void delete(@PathVariable long id) {
         productService.delete(id);

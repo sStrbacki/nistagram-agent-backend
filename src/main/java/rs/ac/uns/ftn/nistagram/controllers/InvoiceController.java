@@ -25,7 +25,7 @@ public class InvoiceController {
         this.mapper = mapper;
     }
 
-    @Secured({"ROLE_ADMIN", "GET_ALL_INVOICES"})
+    @PreAuthorize("hasAuthority('GET_ALL_INVOICES')")
     @GetMapping
     public ResponseEntity<List<InvoiceCollectionDTO>> getAll(){
         var invoiceCollections = service.getAll()
@@ -35,28 +35,28 @@ public class InvoiceController {
         return ResponseEntity.ok(invoiceCollections);
     }
 
-    @Secured({"ROLE_USER", "GET_USER_CART"})
+    @PreAuthorize("hasAuthority('GET_USER_CART')")
     @GetMapping("/user/{username}")
     public ResponseEntity<?> get(@PathVariable String username){
         var invoices = mapper.map(service.get(username), InvoiceCollectionDTO.class);
         return ResponseEntity.ok(invoices);
     }
 
-    @Secured({"ROLE_USER", "CHECKOUT_INVOICE"})
+    @PreAuthorize("hasAuthority('CHECKOUT_INVOICE')")
     @PostMapping
     public ResponseEntity<?> checkout(@RequestBody InvoiceRequestDTO invoiceRequest){
         service.checkout(invoiceRequest);
         return ResponseEntity.ok("Successfully checked out");
     }
 
-    @Secured({"ROLE_ADMIN", "REJECT_INVOICE"})
+    @PreAuthorize("hasAuthority('REJECT_INVOICE')")
     @PutMapping("/reject/{invoiceId}")
     public ResponseEntity<?> reject(@PathVariable long invoiceId){
         service.reject(invoiceId);
         return ResponseEntity.ok("Order rejected");
     }
 
-    @Secured({"ROLE_ADMIN", "ACCEPT_INVOICE"})
+    @PreAuthorize("hasAuthority('ACCEPT_INVOICE')")
     @PutMapping("/accept/{invoiceId}")
     public ResponseEntity<?> accept(@PathVariable long invoiceId){
         service.accept(invoiceId);

@@ -44,7 +44,6 @@ public class User {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         var authorities = new ArrayList<GrantedAuthority>();
         for(var role : roles) {
-            authorities.add(role);
             authorities.addAll(role.getAllowedPermissions());
         }
         return authorities;

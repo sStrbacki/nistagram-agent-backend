@@ -62,11 +62,11 @@ public class AuthFilter extends OncePerRequestFilter {
         }
 
         // Get User authorities
-
         User user;
-        try{
+        try {
             user = userService.get(identity);
-        }catch (ApplicationException e){
+        }
+        catch (ApplicationException e){
             chain.doFilter(request,response);
             return;
         }

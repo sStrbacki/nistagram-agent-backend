@@ -66,6 +66,7 @@ public class ShoppingCartService {
 
     public List<ShoppingCartItem> getShoppingCartItems(String username) {
         var cart = shoppingCartRepository.findShoppingCartByOwnersId(username);
+        if (cart == null) return List.of();
         return cart.getShoppingCartItems();
     }
 }

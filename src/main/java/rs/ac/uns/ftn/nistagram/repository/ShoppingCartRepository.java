@@ -8,5 +8,4 @@ public interface ShoppingCartRepository extends JpaRepository<ShoppingCart,Long>
 
     @Query(value = "select distinct sc from shopping_carts sc where sc.owner.username = :username ")
     ShoppingCart findShoppingCartByOwnersId(String username);
-
 }

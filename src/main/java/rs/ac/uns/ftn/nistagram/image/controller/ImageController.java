@@ -19,7 +19,7 @@ public class ImageController {
         this.imageService = imageService;
     }
 
-    @Secured({"ROLE_ADMIN", "POST_IMAGE"})
+    @PreAuthorize("hasAuthority('POST_IMAGE')")
     @PostMapping
     public String handleImageUpload(@RequestParam("image")MultipartFile file) {
         return imageService.store(file);
