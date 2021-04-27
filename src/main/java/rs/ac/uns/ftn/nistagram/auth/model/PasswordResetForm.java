@@ -1,7 +1,6 @@
 package rs.ac.uns.ftn.nistagram.auth.model;
 
 import org.hibernate.annotations.Type;
-import org.springframework.beans.factory.annotation.Value;
 
 import javax.persistence.*;
 import java.util.Calendar;

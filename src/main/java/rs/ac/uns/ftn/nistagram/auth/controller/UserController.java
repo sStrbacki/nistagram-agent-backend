@@ -48,7 +48,7 @@ public class UserController {
 
     @PostMapping("password-reset/{userUUID}&{resetUUID}")
     public ResponseEntity<?> resetPassword(
-            @RequestBody PasswordResetDTO passwordResetDTO,
+            @RequestBody @Valid PasswordResetDTO passwordResetDTO,
             @PathVariable UUID userUUID,
             @PathVariable UUID resetUUID
     ){
