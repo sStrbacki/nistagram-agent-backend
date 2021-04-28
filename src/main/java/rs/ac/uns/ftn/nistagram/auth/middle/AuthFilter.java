@@ -7,7 +7,7 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 import rs.ac.uns.ftn.nistagram.auth.exceptions.AuthorizationException;
-import rs.ac.uns.ftn.nistagram.auth.model.User;
+import rs.ac.uns.ftn.nistagram.auth.domain.User;
 import rs.ac.uns.ftn.nistagram.auth.service.JwtService;
 import rs.ac.uns.ftn.nistagram.auth.service.UserService;
 import rs.ac.uns.ftn.nistagram.exceptions.ApplicationException;

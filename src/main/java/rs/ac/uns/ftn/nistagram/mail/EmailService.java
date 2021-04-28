@@ -2,10 +2,8 @@ package rs.ac.uns.ftn.nistagram.mail;
 
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
-import rs.ac.uns.ftn.nistagram.auth.model.PasswordResetForm;
-import rs.ac.uns.ftn.nistagram.auth.model.User;
-
-import java.util.UUID;
+import rs.ac.uns.ftn.nistagram.auth.domain.PasswordResetForm;
+import rs.ac.uns.ftn.nistagram.auth.domain.User;
 
 @Service
 public class EmailService {

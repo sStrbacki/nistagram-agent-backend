@@ -3,7 +3,7 @@ package rs.ac.uns.ftn.nistagram.auth.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-import rs.ac.uns.ftn.nistagram.auth.model.Role;
+import rs.ac.uns.ftn.nistagram.auth.domain.Role;
 
 @Repository
 public interface RoleRepository extends JpaRepository<Role, String> {

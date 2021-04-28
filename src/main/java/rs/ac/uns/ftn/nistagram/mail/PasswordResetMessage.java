@@ -1,7 +1,7 @@
 package rs.ac.uns.ftn.nistagram.mail;
 
 import org.springframework.mail.javamail.JavaMailSender;
-import rs.ac.uns.ftn.nistagram.auth.model.PasswordResetForm;
+import rs.ac.uns.ftn.nistagram.auth.domain.PasswordResetForm;
 
 public class PasswordResetMessage extends EmailMessage<PasswordResetForm> {
 
