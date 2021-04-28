@@ -45,7 +45,7 @@ public class ShoppingCartController {
         return ResponseEntity.ok("Shopping cart entry has been successfully removed");
     }
 
-    @PreAuthorize("hasAuthority('GET_CART_ENTRY')")
+    @PreAuthorize("hasAuthority('GET_USER_CART')")
     @GetMapping
     public ResponseEntity<List<ShoppingCartItemDTO>> getShoppingCartItems(HttpServletRequest request){
         String username = (String) httpUtil.getHttpRequestAttribute(request, httpUtil.USERNAME_KEY);
