@@ -3,6 +3,7 @@ package rs.ac.uns.ftn.nistagram.shopping.services;
 import org.springframework.stereotype.Service;
 import rs.ac.uns.ftn.nistagram.auth.repository.UserRepository;
 import rs.ac.uns.ftn.nistagram.shopping.controllers.DTOs.cart.ShoppingCartEntryDTO;
+import rs.ac.uns.ftn.nistagram.shopping.domain.Product;
 import rs.ac.uns.ftn.nistagram.shopping.domain.cart.ShoppingCart;
 import rs.ac.uns.ftn.nistagram.shopping.domain.cart.ShoppingCartItem;
 import rs.ac.uns.ftn.nistagram.exceptions.EntityNotFoundException;
@@ -37,11 +38,14 @@ public class ShoppingCartService {
         var product = productRepository.findById(shoppingCartEntry.getProductId())
                 .orElseThrow(() -> new EntityNotFoundException("Product with a given id doesn't exist"));
 
+        product.setQuantity(product.getQuantity() - shoppingCartEntry.getQuantity());
+        productRepository.save(product);
+
         if(cart == null)
-            cart = new ShoppingCart(userRepository.getOne(username));
+            cart = new ShoppingCart(userRepository.findById(username).orElseThrow());
 
         cart.addProduct(product, shoppingCartEntry.getQuantity());
-        shoppingCartRepository.saveAndFlush(cart);
+        shoppingCartRepository.save(cart);
     }
 
     public void delete(String username, long shoppingCartItemId) {
@@ -50,8 +54,16 @@ public class ShoppingCartService {
                 .findShoppingCartByOwnersId(username);
 
         validateForDeletion(cart, shoppingCartItemId);
+
+        ShoppingCartItem cartItem = cart.findCartItemById(shoppingCartItemId);
+        Product removedProduct = cartItem.getProduct();
+        int quantity = cartItem.getQuantity();
+
         cart.removeItem(shoppingCartItemId);
-        shoppingCartRepository.saveAndFlush(cart);
+        shoppingCartRepository.save(cart);
+
+        removedProduct.setQuantity(removedProduct.getQuantity() + quantity);
+        productRepository.save(removedProduct);
     }
 
     private void validateUser(String username) {

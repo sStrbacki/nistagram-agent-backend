@@ -85,6 +85,13 @@ public class ShoppingCart {
                                     .get());
     }
 
+    public ShoppingCartItem findCartItemById(long cartItemId) {
+        for (var item : this.shoppingCartItems)
+            if (item.getId() == cartItemId)
+                return item;
+        return null;
+    }
+
     public void clearCart() {
         this.shoppingCartItems.clear();
     }
