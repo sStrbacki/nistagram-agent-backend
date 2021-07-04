@@ -1,5 +1,6 @@
 package rs.ac.uns.ftn.nistagram.auth.service;
 
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import rs.ac.uns.ftn.nistagram.auth.exceptions.*;
 import rs.ac.uns.ftn.nistagram.auth.domain.PasswordResetForm;
@@ -17,6 +18,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor
 public class UserService {
 
     private final UserRepository userRepository;
@@ -25,21 +27,6 @@ public class UserService {
     private final EmailService emailService;
     private final PasswordResetFormRepository passResetRepository;
     private final RoleRepository roleRepository;
-
-    public UserService(
-            UserRepository userRepository,
-            PasswordHandler passwordHandler,
-            EmailService emailService,
-            JwtService jwtService,
-            PasswordResetFormRepository passResetRepository,
-            RoleRepository roleRepository) {
-        this.userRepository = userRepository;
-        this.passwordHandler = passwordHandler;
-        this.emailService = emailService;
-        this.jwtService = jwtService;
-        this.passResetRepository = passResetRepository;
-        this.roleRepository = roleRepository;
-    }
 
     public User get(String username){
         User user = userRepository.getByUsername(username).orElseThrow(InvalidLoginCredentialsException::new);

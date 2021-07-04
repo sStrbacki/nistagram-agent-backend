@@ -7,6 +7,6 @@ import rs.ac.uns.ftn.nistagram.auth.domain.Role;
 
 @Repository
 public interface RoleRepository extends JpaRepository<Role, String> {
-    @Query("select role from roles role where role.id like 'ROLE_USER' ")
+    @Query("select role from Role role where role.id like 'ROLE_USER' ")
     Role getUserRole();
 }

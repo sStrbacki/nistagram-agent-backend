@@ -70,4 +70,5 @@ public class ProductController {
     public void delete(@PathVariable long id) {
         productService.delete(id);
     }
+    // TODO Deleting doesn't work if someone has that article in their cart
 }

@@ -3,7 +3,6 @@ package rs.ac.uns.ftn.nistagram.shopping.domain;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "products")
 public class Product {
 
     @Id

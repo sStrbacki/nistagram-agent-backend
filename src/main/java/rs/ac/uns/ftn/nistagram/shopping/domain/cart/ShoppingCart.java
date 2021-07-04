@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Entity(name = "shopping_carts")
+@Entity
 public class ShoppingCart {
 
     @Id
@@ -16,10 +16,9 @@ public class ShoppingCart {
     private long id;
 
     @OneToOne
-    @JoinColumn(name = "owner_id")
     private User owner;
 
-    @OneToMany(mappedBy = "shoppingCart", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "shoppingCart", cascade = CascadeType.ALL)
     private List<ShoppingCartItem> shoppingCartItems;
 
     public ShoppingCart(){}

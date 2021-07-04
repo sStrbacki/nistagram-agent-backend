@@ -4,7 +4,7 @@ import rs.ac.uns.ftn.nistagram.shopping.domain.Product;
 
 import javax.persistence.*;
 
-@Entity(name = "shopping_cart_items")
+@Entity
 public class ShoppingCartItem {
 
     @Id
@@ -12,11 +12,9 @@ public class ShoppingCartItem {
     private long id;
 
     @OneToOne
-    @JoinColumn(name = "product_id", referencedColumnName = "id")
     private Product product;
 
     @ManyToOne
-    @JoinColumn(name="shopping_cart_id", referencedColumnName = "id")
     private ShoppingCart shoppingCart;
 
     private int quantity;
