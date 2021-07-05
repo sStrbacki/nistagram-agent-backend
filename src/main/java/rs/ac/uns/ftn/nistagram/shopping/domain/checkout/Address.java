@@ -2,14 +2,11 @@ package rs.ac.uns.ftn.nistagram.shopping.domain.checkout;
 
 import javax.persistence.*;
 
-@Entity
+@Embeddable
 public class Address {
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private long id;
     private String addressLine;
     private String city;
-    private String state;
+    private String country;
     private String postalCode;
 
     public String getAddressLine() {
@@ -28,12 +25,12 @@ public class Address {
         this.city = city;
     }
 
-    public String getState() {
-        return state;
+    public String getCountry() {
+        return country;
     }
 
-    public void setState(String state) {
-        this.state = state;
+    public void setCountry(String country) {
+        this.country = country;
     }
 
     public String getPostalCode() {

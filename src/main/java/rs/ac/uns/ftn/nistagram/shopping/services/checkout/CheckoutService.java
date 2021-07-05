@@ -2,12 +2,14 @@ package rs.ac.uns.ftn.nistagram.shopping.services.checkout;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import rs.ac.uns.ftn.nistagram.auth.domain.User;
 import rs.ac.uns.ftn.nistagram.shopping.domain.cart.ShoppingCart;
 import rs.ac.uns.ftn.nistagram.shopping.domain.cart.ShoppingCartItem;
 import rs.ac.uns.ftn.nistagram.shopping.domain.checkout.Order;
 import rs.ac.uns.ftn.nistagram.shopping.domain.checkout.OrderedProduct;
 import rs.ac.uns.ftn.nistagram.shopping.domain.checkout.Address;
+import rs.ac.uns.ftn.nistagram.shopping.repositories.ShoppingCartItemRepository;
 import rs.ac.uns.ftn.nistagram.shopping.repositories.ShoppingCartRepository;
 import rs.ac.uns.ftn.nistagram.shopping.repositories.checkout.OrderRepository;
 
@@ -20,8 +22,10 @@ public class CheckoutService {
 
     private final ShoppingCartRepository shoppingCartRepository;
     private final OrderRepository orderRepository;
+    private final ShoppingCartItemRepository cartItemRepository;
 
 
+    @Transactional
     public void checkout(String username, Address deliveryAddress) {
         ShoppingCart cart = shoppingCartRepository.findShoppingCartByOwnersId(username).orElseThrow();
         List<ShoppingCartItem> cartItems = cart.getShoppingCartItems();
@@ -33,17 +37,22 @@ public class CheckoutService {
         ArrayList<OrderedProduct> orderedProducts = new ArrayList<>();
         for (ShoppingCartItem cartItem : cartItems) {
             OrderedProduct orderedProduct = new OrderedProduct();
+
             orderedProduct.setProduct(cartItem.getProduct());
             orderedProduct.setQuantity(cartItem.getQuantity());
+            orderedProduct.setOrder(order);
+
             orderedProducts.add(orderedProduct);
         }
 
         order.setProducts(orderedProducts);
 
         orderRepository.save(order);
-        shoppingCartRepository.delete(cart);
+        cartItemRepository.deleteFromCartById(cart.getId());
+//        shoppingCartRepository.deleteViaId(cart.getId());
     }
 
+    @Transactional
     public void markShipped(long orderId) {
         Order foundOrder = orderRepository.findById(orderId).orElseThrow();
         foundOrder.setShipped();

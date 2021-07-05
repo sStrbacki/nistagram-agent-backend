@@ -8,15 +8,12 @@ import javax.persistence.*;
 public class ShoppingCartItem {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
-
     @OneToOne
     private Product product;
-
     @ManyToOne
     private ShoppingCart shoppingCart;
-
     private int quantity;
 
     public ShoppingCartItem() {

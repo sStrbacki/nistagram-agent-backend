@@ -17,7 +17,7 @@ public class Order {
     private User user;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
     private List<OrderedProduct> products;
-    @OneToOne
+    @Embedded
     private Address deliveryAddress;
 
     public Address getDeliveryAddress() {

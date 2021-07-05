@@ -1,5 +1,6 @@
 package rs.ac.uns.ftn.nistagram.shopping.services;
 
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import rs.ac.uns.ftn.nistagram.auth.repository.UserRepository;
 import rs.ac.uns.ftn.nistagram.shopping.controllers.DTOs.cart.ShoppingCartEntryDTO;
@@ -15,19 +16,12 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class ShoppingCartService {
 
     private final ShoppingCartRepository shoppingCartRepository;
     private final UserRepository userRepository;
     private final ProductRepository productRepository;
-
-    public ShoppingCartService(ShoppingCartRepository shoppingCartRepository,
-                               UserRepository userRepository,
-                               ProductRepository productRepository) {
-        this.shoppingCartRepository = shoppingCartRepository;
-        this.userRepository = userRepository;
-        this.productRepository = productRepository;
-    }
 
     @Transactional
     public void add(String username, ShoppingCartEntryDTO shoppingCartEntry) {

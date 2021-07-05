@@ -14,18 +14,17 @@ public class ShoppingCart {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-
     @OneToOne
     private User owner;
 
-    @OneToMany(mappedBy = "shoppingCart", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "shoppingCart", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ShoppingCartItem> shoppingCartItems;
 
     public ShoppingCart(){}
 
     public ShoppingCart(User owner) {
         this.owner = owner;
-        this.shoppingCartItems = new ArrayList<ShoppingCartItem>();
+        this.shoppingCartItems = new ArrayList<>();
     }
 
     public long getId() {
