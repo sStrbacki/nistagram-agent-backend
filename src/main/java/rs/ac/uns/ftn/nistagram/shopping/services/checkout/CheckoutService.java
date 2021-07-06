@@ -24,7 +24,6 @@ public class CheckoutService {
     private final OrderRepository orderRepository;
     private final ShoppingCartItemRepository cartItemRepository;
 
-
     @Transactional
     public void checkout(String username, Address deliveryAddress) {
         ShoppingCart cart = shoppingCartRepository.findShoppingCartByOwnersId(username).orElseThrow();
