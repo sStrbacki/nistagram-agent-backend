@@ -1,14 +1,17 @@
 package rs.ac.uns.ftn.nistagram.campaign.controller;
 
 import lombok.AllArgsConstructor;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import rs.ac.uns.ftn.nistagram.campaign.http.NistagramCampaignClient;
-import rs.ac.uns.ftn.nistagram.campaign.model.LongTermCampaign;
+import rs.ac.uns.ftn.nistagram.campaign.model.CampaignCDto;
+import rs.ac.uns.ftn.nistagram.campaign.model.LongTermCampaignCDto;
+import rs.ac.uns.ftn.nistagram.campaign.model.OneTimeCampaignCDto;
 
-@Controller
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+@RestController
 @RequestMapping("api/campaign")
 @AllArgsConstructor
 public class NistagramCampaignController {
@@ -16,12 +19,23 @@ public class NistagramCampaignController {
     private final NistagramCampaignClient nistagramClient;
 
     @GetMapping
-    public ResponseEntity<String> test() {
-        try {
-            nistagramClient.createLongTermCampaign(new LongTermCampaign());
-        }
-        catch (Exception ignore) {}
+    public LocalDateTime getAll() {
+        var a = new ArrayList<Object>();
 
-        return ResponseEntity.ok("Tested.");
+//        trainings.removeIf(training -> training.id === trId);
+
+        return LocalDateTime.now();
+//        return nistagramClient.getAll();
+    }
+
+    @PostMapping("one-term")
+    public OneTimeCampaignCDto create(@RequestBody OneTimeCampaignCDto campaign) {
+        System.out.println("Here");
+        return nistagramClient.createOneTermCampaign(campaign);
+    }
+
+    @PostMapping("long-term")
+    public LongTermCampaignCDto create(@RequestBody LongTermCampaignCDto campaign) {
+        return nistagramClient.createLongTermCampaign(campaign);
     }
 }

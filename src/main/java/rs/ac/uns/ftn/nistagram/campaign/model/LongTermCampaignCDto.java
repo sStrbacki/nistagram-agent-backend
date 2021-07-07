@@ -4,13 +4,11 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @Getter
 @Setter
-public class LongTermCampaign extends Campaign {
+public class LongTermCampaignCDto extends CampaignCDto {
 
     private LocalDate startsOn;
     private LocalDate endsOn;
-
 }
