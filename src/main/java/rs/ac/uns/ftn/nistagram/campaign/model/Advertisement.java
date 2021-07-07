@@ -8,4 +8,5 @@ import lombok.Setter;
 public class Advertisement {
     private String caption;
     private String mediaUrl;
+    private String websiteUrl;
 }
