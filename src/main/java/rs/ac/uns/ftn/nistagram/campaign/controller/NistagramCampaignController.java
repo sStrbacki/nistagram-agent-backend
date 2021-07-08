@@ -3,9 +3,10 @@ package rs.ac.uns.ftn.nistagram.campaign.controller;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import rs.ac.uns.ftn.nistagram.campaign.http.NistagramCampaignClient;
-import rs.ac.uns.ftn.nistagram.campaign.model.CampaignCDto;
-import rs.ac.uns.ftn.nistagram.campaign.model.LongTermCampaignCDto;
-import rs.ac.uns.ftn.nistagram.campaign.model.OneTimeCampaignCDto;
+import rs.ac.uns.ftn.nistagram.campaign.model.create.CampaignCDto;
+import rs.ac.uns.ftn.nistagram.campaign.model.create.LongTermCampaignCDto;
+import rs.ac.uns.ftn.nistagram.campaign.model.create.OneTimeCampaignCDto;
+import rs.ac.uns.ftn.nistagram.campaign.model.view.CampaignVDto;
 
 import java.util.List;
 
@@ -17,7 +18,7 @@ public class NistagramCampaignController {
     private final NistagramCampaignClient nistagramClient;
 
     @GetMapping
-    public List<CampaignCDto> getAll() {
+    public List<CampaignVDto> getAll() {
         return nistagramClient.getAll();
     }
 

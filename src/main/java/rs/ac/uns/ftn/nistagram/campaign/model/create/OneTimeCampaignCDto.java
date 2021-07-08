@@ -1,4 +1,4 @@
-package rs.ac.uns.ftn.nistagram.campaign.model;
+package rs.ac.uns.ftn.nistagram.campaign.model.create;
 
 import lombok.Getter;
 

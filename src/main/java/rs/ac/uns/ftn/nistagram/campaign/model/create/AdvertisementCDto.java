@@ -1,11 +1,11 @@
-package rs.ac.uns.ftn.nistagram.campaign.model;
+package rs.ac.uns.ftn.nistagram.campaign.model.create;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class Advertisement {
+public class AdvertisementCDto {
     private String caption;
     private String mediaUrl;
     private String websiteUrl;
